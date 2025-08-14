@@ -1,0 +1,30 @@
+<div class="navs">
+    <div class="nav_bar">
+        <div class="icon">
+            <a href="#">Logo</a>
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a routerLink="/admin/product-list">Product List</a></li>
+                <li><a routerLink="/admin/product-form" routerLinkActive="active">Product Form</a></li>
+                <!-- <li><a routerLink="/admin/product-detail">Product Details</a></li> -->
+            </ul>
+        </div>
+        <div class="profile">
+            <!-- <i class="bi bi-person-circle"></i> -->
+            <div class="profile_btn">
+                <button class="profile_btn">
+                    <img [src]="userProfile?.profileImageUrl" alt="Profile">
+                </button>
+                <div class="dropdown-menu">
+                    <!-- <a (click)="getProfile()" href="#">My profile</a> -->
+                    <a routerLink="/profile">Profile</a>
+                    <a routerLink="/user_password_change">Password Change</a>
+                    <a href="#">Setting</a>
+                    <a (click)="logout()" style="cursor: pointer;">Logout</a>
+                </div>
+                <i class="bi bi-box-arrow-left"></i>
+            </div>
+        </div>
+    </div>
+</div>

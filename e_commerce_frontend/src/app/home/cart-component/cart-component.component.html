@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="loadding" *ngIf="isLoading">
+        <p>Loading your cart....</p>
+    </div>
+
+    <div *ngIf="cart && !isLoading">
+        <h2>Your shopping cart</h2>
+        <div *ngIf="cart.items.length === 0">
+            <p>Your cart is empty</p>
+            <button routerLink="/home">Continue Shopping</button>
+        </div>
+        <div *ngIf="cart.items.length > 0">
+            <div *ngFor="let item of cart.items">
+                <img [src]="item.productImage" alt="{{item.productName}}">
+
+                <div>
+                    <h2>{{item.productName}}</h2>
+                    <span>{{item.price}}</span>
+                    <span *ngIf="item.discountedPrice < item.price">
+                        {{item.discountedPrice}}
+                    </span>
+                </div>
+
+                <div>
+                    <button (click)="updateQuantity(item, item.quantity - 1)">remove</button>
+                    <span>{{item.quantity}}</span>
+                    <button (click)="updateQuantity(item, item.quantity + 1)">add</button>
+                    <button (click)="removeItem(item.productId)">delete</button>
+                </div>
+
+                <div>{{item.itemTotal}}</div>
+
+                <div>
+                    <span>Subtotal : </span>
+                    <span>${{cart.subtotal}}</span>
+                </div>
+                <div>
+                    <span>Discount : </span>
+                    <span>${{cart.discount}}</span>
+                </div>
+                <div>
+                    <span>Total : </span>
+                    <span>{{cart.total }} </span>
+                </div>
+
+                <div class="cart-action">
+                    <button routerLink="/home">Continue Shopping</button>
+                    <button (click)="checkout()">Proceed to checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

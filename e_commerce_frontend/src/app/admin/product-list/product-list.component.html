@@ -1,0 +1,41 @@
+<div class="container">
+    <h2>Product List</h2>
+    <a routerLink="/admin/product-form">Add product</a>
+
+    <div *ngIf="isLoading" class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading && products.length ===0" class="alert alert-info">
+        No products found.
+    </div>
+
+    <div *ngFor="let product of products">
+        <div class="card h-100">
+            <img *ngIf="product.images && product.images.length > 0" [src]="product.images[0].fileUrl"
+                class="card-img-top product-image" alt="{{ product.name }}">
+        </div>
+        <div class="card-body">
+            <h5>{{product.name}}</h5>
+            <p>{{product.category}}</p>
+            <p>{{product.description}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <span *ngIf="product.currentPrice < product.price">{{product.price | number:'1.2-2'}}</span>
+                    <span *ngIf="product.currentPrice < product.price">{{product.currentPrice | number:'1.2-2'}}</span>
+                    <span *ngIf="product.currentPrice === product.price">{{product.price | number:'1.2-2'}}</span>
+                </div>
+            </div>
+            <span>{{product.quantity}}</span>
+        </div>
+        <div class="card-footer">
+            <button (click)="viewProduct(product.id)">View</button>
+            <button (click)="editProduct(product.id)">Edit</button>
+        <button (click)="deleteProduct(product.id)">Delete</button>
+    </div>
+    </div>
+
+    
+</div>

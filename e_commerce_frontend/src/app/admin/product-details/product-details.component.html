@@ -1,0 +1,85 @@
+<div *ngIf="product && !isLoading" class="product-details">
+  <h2>{{ product.name }}</h2>
+  <p><strong>Description:</strong> {{ product.description }}</p>
+  <p><strong>Price:</strong> {{ product.price | currency }}</p>
+  <p><strong>Current Price:</strong> {{ product.currentPrice | currency }}</p>
+  <p><strong>Quantity:</strong> {{ product.quantity }}</p>
+  <p><strong>Category:</strong> {{ product.category }}</p>
+  <p><strong>SKU:</strong> {{ product.sku }}</p>
+
+  <h3>Images</h3>
+  <div class="image-list">
+    <div class="image-card" *ngFor="let image of product.images" style="height: 500px; width: 450px; overflow: hidden;">
+      <img [src]="image.fileUrl" alt="Product Image">
+      <p>{{ image.fileName }}</p>
+      <p><strong>{{ image.isPrimary ? 'Primary' : '' }}</strong></p>
+      <button *ngIf="!image.isPrimary" (click)="setPrimaryImage(image.id)">Set Primary</button>
+      <button (click)="deleteImage(image.id)">Delete</button>
+    </div>
+  </div>
+  <input type="file" (change)="uploadImage($event)" accept="image/*" [disabled]="isLoading">
+
+  <h3>Discounts</h3>
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Percentage</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Active</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let discount of product.discounts">
+        <td>{{ discount.id }}</td>
+        <td>{{ discount.name }}</td>
+        <td>{{ discount.percentage }}%</td>
+        <td>{{ discount.startDate | date }}</td>
+        <td>{{ discount.endDate | date }}</td>
+        <td>{{ discount.active ? 'Yes' : 'No' }}</td>
+        <td>
+          <button (click)="deleteDiscount(discount.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Add Discount</h3>
+  <form [formGroup]="discountForm" (ngSubmit)="createDiscount()" class="form-grid">
+    <div>
+      <label>Name</label>
+      <input type="text" formControlName="name" />
+    </div>
+    <div>
+      <label>Percentage</label>
+      <input type="number" formControlName="percentage" />
+    </div>
+    <div>
+      <label>Start Date</label>
+      <input type="datetime-local" formControlName="startDate" />
+    </div>
+    <div>
+      <label>End Date</label>
+      <input type="datetime-local" formControlName="endDate" />
+    </div>
+    <div>
+      <label><input type="checkbox" formControlName="active" /> Active</label>
+    </div>
+    <div>
+      <button type="submit" [disabled]="discountForm.invalid || isLoading">
+        {{ isLoading ? 'Loading...' : 'Add Discount' }}
+      </button>
+    </div>
+  </form>
+
+  <br />
+  <a href="/admin/product-list" class="btn-back">← Back to List</a>
+</div>
+
+<div *ngIf="isLoading" class="loading-spinner">
+  <div class="spinner"></div>
+  <p>Loading product details...</p>
+</div>

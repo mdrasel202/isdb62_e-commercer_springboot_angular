@@ -1,0 +1,161 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  max-width: 400px;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.product-image {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.product-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.no-image {
+  height: 200px;
+  background-color: #f0f0f0;
+  color: #aaa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.product-details {
+  text-align: left;
+}
+
+.product-name {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.product-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.price-section {
+  margin-bottom: 16px;
+}
+
+.current-price {
+  font-size: 20px;
+  color: #28a745;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.original-price {
+  font-size: 16px;
+  color: #999;
+  text-decoration: line-through;
+  margin-right: 8px;
+}
+
+.discount-badge {
+  font-size: 14px;
+  background-color: #ffc107;
+  color: #000;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.quantity-btn {
+  background-color: #e0e0e0;
+  border: none;
+  padding: 6px 12px;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.quantity-value {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.stock-status {
+  margin-bottom: 10px;
+}
+
+.in-stock {
+  color: green;
+  font-weight: bold;
+}
+
+.out-of-stock {
+  color: red;
+  font-weight: bold;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-add-to-cart,
+.btn-buy-now {
+  flex: 1;
+  padding: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-add-to-cart {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-add-to-cart:hover {
+  background-color: #0069d9;
+}
+
+.btn-buy-now {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-buy-now:hover {
+  background-color: #218838;
+}
+
+
+.total-amount {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 8px;
+  color: #333;
+}

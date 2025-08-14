@@ -1,0 +1,34 @@
+<app-nav-bar></app-nav-bar>
+<router-outlet></router-outlet>
+<div class="product-container">
+  <h2>Products</h2>
+
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let product of products" [routerLink]="['/product-component',product.id]">
+      <div class="product-image">
+        <img *ngIf="product.images.length > 0" [src]="product.images[0].fileUrl" alt="Product Image" />
+        <div *ngIf="product.images.length === 0" class="no-image">No Image</div>
+      </div>
+
+      <div class="product-body">
+        <h3 class="product-title">{{ product.name }}</h3>
+        <p class="product-description">{{ product.description }}</p>
+
+        <div class="product-price-section">
+          <div *ngIf="hasActiveDiscount(product); else noDiscount">
+            <div class="price-old">{{ product.price | currency }}</div>
+            <div class="price-discounted">{{ getCurrentPrice(product) | currency }}</div>
+            <div class="discount-info">
+              <span class="discount-badge">Save {{ getSavingsAmount(product) | currency }}</span>
+              <span class="discount-percent">({{ getDiscountPercentage(product) }}% off)</span>
+            </div>
+          </div>
+
+          <ng-template #noDiscount>
+            <div class="price">{{ product.price | currency }}</div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow">
+        <div class="card-body p-4">
+          <h2 class="text-center mb-4">Register</h2>
+          
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" formControlName="firstName"
+                       [ngClass]="{ 'is-invalid': registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched }">
+                <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched" class="invalid-feedback">
+                  First name is required
+                </div>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" formControlName="lastName"
+                       [ngClass]="{ 'is-invalid': registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched }">
+                <div *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched" class="invalid-feedback">
+                  Last name is required
+                </div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" formControlName="email"
+                     [ngClass]="{ 'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched }">
+              <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="invalid-feedback">
+                <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</div>
+                <div *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email</div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" formControlName="password"
+                     [ngClass]="{ 'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched }">
+              <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="invalid-feedback">
+                <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</div>
+                <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters</div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="phoneNumber" class="form-label">Phone Number</label>
+              <input type="tel" class="form-control" id="phoneNumber" formControlName="phoneNumber">
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="birthDate" class="form-label">Birth Date</label>
+                <input type="date" class="form-control" id="birthDate" formControlName="birthDate">
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select class="form-select" id="gender" formControlName="gender">
+                  <option value="">Select Gender</option>
+                  <option value="MALE">Male</option>
+                  <option value="FEMALE">Female</option>
+                  <option value="OTHER">Other</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <button type="button" class="btn btn-outline-secondary" (click)="toggleAddressFields()">
+                {{ showAddressFields ? 'Hide' : 'Show' }} Address Fields
+              </button>
+            </div>
+            
+            <div *ngIf="showAddressFields" class="border p-3 mb-3 rounded">
+              <h5 class="mb-3">Address Information</h5>
+              
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="doorNo" class="form-label">Door No</label>
+                  <input type="text" class="form-control" id="doorNo" formControlName="doorNo">
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                  <label for="street" class="form-label">Street</label>
+                  <input type="text" class="form-control" id="street" formControlName="street">
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="city" class="form-label">City</label>
+                  <input type="text" class="form-control" id="city" formControlName="city">
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                  <label for="district" class="form-label">District</label>
+                  <input type="text" class="form-control" id="district" formControlName="district">
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="state" class="form-label">State</label>
+                  <input type="text" class="form-control" id="state" formControlName="state">
+                </div>
+                
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100" [disabled]="isLoading">
+              <span *ngIf="!isLoading">Register</span>
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            </button>
+          </form>
+          
+          <div class="mt-3 text-center">
+            <p>Already have an account? <a routerLink="/login">Login</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
